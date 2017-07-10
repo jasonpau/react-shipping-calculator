@@ -1,24 +1,77 @@
-.App {
-  text-align: center;
+/* CSS FILE FOR SHIPPING CALCULATOR */
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  font-size: 20px;
+  background: #f0f0f0;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+section {
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+h1 {
+  font-size: 48px;
+  font-weight: 100;
+}
+
+form {
+  border: 2px solid #ddd;
+  padding: 6%;
+  box-sizing: border-box;
+}
+
+input[type="text"] {
+  font-size: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  padding: 2% 3%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#radio_buttons {
+  list-style-type: none;
+  padding: 0;
+  margin: 30px 0 15px 0;
+
+}
+#radio_buttons li {
+  display: inline-block;
+}
+#radio_buttons li label {
+  border: 2px solid #ddd;
+  padding: 8px 15px 10px 10px;
+  box-sizing: border-box;
+  margin-right: 15px;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+#radio_buttons li label:hover {
+  background-color: #e8e8e8;
+}
+
+button {
+  background: #10ADED;
   color: white;
+  font-size: 20px;
+  border: 0;
+  padding: 10px 15px;
+}
+button:hover {
+  background: #4bc3ff;
 }
 
-.App-intro {
-  font-size: large;
+#shipping_information {
+  margin-top: 30px;
+  border: 2px solid #ddd;
+  padding: 3% 6%;
+  width: 100%;
+  box-sizing: border-box;
+  list-style-type: none;
 }
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+#shipping_information > li {
+  margin: 5px 0;
 }
