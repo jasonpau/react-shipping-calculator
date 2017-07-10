@@ -1,23 +1,5 @@
-
-// export function validate_keydown() {
-//   let asciiKeyValue = event.which;
-//
-//   // Check if the value of the input is valid
-//   if (asciiKeyValue >= 48 && asciiKeyValue <= 57 || // 0-9 on the keyboard
-//     asciiKeyValue >= 96 && asciiKeyValue <= 105 || // 0-9 on the num pad
-//     asciiKeyValue >= 37 && asciiKeyValue <= 40 || // directional keys
-//     asciiKeyValue === 190 || // period key on keyboard
-//     asciiKeyValue === 110 || // period key on num pad
-//     asciiKeyValue === 8 || // backspace
-//     asciiKeyValue === 46) { // delete
-//   } else {
-//     event.preventDefault();
-//   }
-// }
-
 export function calculate_shipping(weight = 0, days = 5) {
 
-  weight = parseFloat(weight);
   days = parseFloat(days);
 
   let cost_per_ounce;
@@ -28,7 +10,7 @@ export function calculate_shipping(weight = 0, days = 5) {
   let shipping_time_ms = ms;
   let arrival_date;
   let shipping_cost_dollars;
-  let weight_in_ounces = weight * 16; // multiply input weight by 16 to obtain ounces
+  let weight_in_ounces = parseFloat(weight) * 16; // multiply input weight by 16 to obtain ounces
 
   // create shipping multiplier depending on selected shipping speed
   if (days === 3) {
@@ -97,7 +79,7 @@ export function calculate_shipping(weight = 0, days = 5) {
   // create object to be returned that includes all values needed to build the display
   return {
     weight_ozs: weight_in_ounces,
-    weight_lbs: weight,
+    weight_lbs: (weight) ? weight : 0,
     shipping_speed: days,
     departure_date: formatted_current_date_string,
     arrival_date: formatted_arrival_date_string,

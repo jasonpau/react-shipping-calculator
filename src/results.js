@@ -30,7 +30,6 @@ const Results = (props) => {
         <li className="weight"><strong>Cost: </strong>{cost}</li>
       </ul>
     );
-
 };
 
 export default Results;

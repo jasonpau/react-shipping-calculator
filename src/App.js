@@ -10,8 +10,8 @@ class App extends Component {
     super(props);
     this.state = {
       shipping_speed: '5',
-      weight_lbs: '',
-      weight_ozs: '',
+      weight_lbs: '0',
+      weight_ozs: '0',
       departure_date: '',
       arrival_date: '',
       cost: '0'
@@ -19,21 +19,31 @@ class App extends Component {
     this.updateResults = this.updateResults.bind(this);
   }
 
+  handleKeyPress(event) {
+    console.log('keypress event.which:',event.which);
+    let asciiKeyValue = event.which;
+
+    // Check if the value of the input is valid
+    if (asciiKeyValue >= 48 && asciiKeyValue <= 57 || // 0-9 on the keyboard
+      asciiKeyValue >= 96 && asciiKeyValue <= 105 || // 0-9 on the num pad
+      asciiKeyValue >= 37 && asciiKeyValue <= 40 || // directional keys
+      asciiKeyValue === 190 || // period key on keyboard
+      asciiKeyValue === 110 || // period key on num pad
+      asciiKeyValue === 8 || // backspace
+      asciiKeyValue === 46) { // delete
+
+      this.updateResults(event, 'weight');
+    } else {
+      event.preventDefault();
+    }
+
+  }
+
   updateResults(e, type) {
-    let current_weight;
-    let current_speed;
+    const current_weight = (type === 'weight') ? e.target.value : this.state.weight_lbs;
+    const current_speed = (type === 'speed') ? e.target.value : this.state.shipping_speed;
 
-    if (type === 'weight') {
-      current_weight = e.target.value;
-      current_speed = this.state.shipping_speed;
-    }
-
-    if (type === 'speed') {
-      current_weight = this.state.weight_lbs;
-      current_speed = e.target.value;
-    }
-
-    let {
+    const {
       weight_ozs,
       weight_lbs,
       shipping_speed,
@@ -53,25 +63,25 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <section>
         <h1>Shipping Calculator</h1>
         <form>
+          <label htmlFor="shipping_weight">Weight of package in pounds</label>
           <input
             id="shipping_weight"
             type="text"
             placeholder="Weight of package in pounds"
             value={this.state.weight_lbs}
             onChange={ (event) => this.updateResults(event, 'weight') }
+            onKeyPress={ (event) => this.handleKeyPress(event) }
           />
-
+          <label htmlFor="radio_buttons">Shipping speed</label>
           <ul id="radio_buttons">
             <InputRadio updateResults={this.updateResults} shipping_speed={this.state.shipping_speed} days="5" />
             <InputRadio updateResults={this.updateResults} shipping_speed={this.state.shipping_speed} days="3" />
             <InputRadio updateResults={this.updateResults} shipping_speed={this.state.shipping_speed} days="2" />
           </ul>
-
           {/*<button type="button" id="submit_button">Calculate</button>*/}
         </form>
         <Results details={this.state}/>
