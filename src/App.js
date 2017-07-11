@@ -19,26 +19,6 @@ class App extends Component {
     this.updateResults = this.updateResults.bind(this);
   }
 
-  handleKeyPress(event) {
-    console.log('keypress event.which:',event.which);
-    let asciiKeyValue = event.which;
-
-    // Check if the value of the input is valid
-    if (asciiKeyValue >= 48 && asciiKeyValue <= 57 || // 0-9 on the keyboard
-      asciiKeyValue >= 96 && asciiKeyValue <= 105 || // 0-9 on the num pad
-      asciiKeyValue >= 37 && asciiKeyValue <= 40 || // directional keys
-      asciiKeyValue === 190 || // period key on keyboard
-      asciiKeyValue === 110 || // period key on num pad
-      asciiKeyValue === 8 || // backspace
-      asciiKeyValue === 46) { // delete
-
-      this.updateResults(event, 'weight');
-    } else {
-      event.preventDefault();
-    }
-
-  }
-
   updateResults(e, type) {
     const current_weight = (type === 'weight') ? e.target.value : this.state.weight_lbs;
     const current_speed = (type === 'speed') ? e.target.value : this.state.shipping_speed;
@@ -70,11 +50,10 @@ class App extends Component {
           <label htmlFor="shipping_weight">Weight of package in pounds</label>
           <input
             id="shipping_weight"
-            type="text"
+            type="number"
             placeholder="Weight of package in pounds"
             value={this.state.weight_lbs}
             onChange={ (event) => this.updateResults(event, 'weight') }
-            onKeyPress={ (event) => this.handleKeyPress(event) }
           />
           <label htmlFor="radio_buttons">Shipping speed</label>
           <ul id="radio_buttons">
