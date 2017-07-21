@@ -73,13 +73,19 @@ export function calculate_shipping(weight = 0, days = 5) {
     "November",
     "December"
   ];
-  let formatted_current_date_string = '' + monthNames[current_date.getMonth()] + ' ' + current_date.getDate() + ', ' + current_date.getFullYear();
-  let formatted_arrival_date_string = '' + monthNames[arrival_date.getMonth()] + ' ' + arrival_date.getDate() + ', ' + arrival_date.getFullYear();
+  let formatted_current_date_string = '' +
+    monthNames[current_date.getMonth()] + ' ' +
+    current_date.getDate() + ', ' +
+    current_date.getFullYear();
+  let formatted_arrival_date_string = '' +
+    monthNames[arrival_date.getMonth()] + ' ' +
+    arrival_date.getDate() + ', ' +
+    arrival_date.getFullYear();
 
   // create object to be returned that includes all values needed to build the display
   return {
     weight_ozs: weight_in_ounces,
-    weight_lbs: (weight) ? weight : 0,
+    weight_lbs: weight,
     shipping_speed: days,
     departure_date: formatted_current_date_string,
     arrival_date: formatted_arrival_date_string,
